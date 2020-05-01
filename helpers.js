@@ -1,72 +1,3 @@
-console.log('script connected!');
-
-const testData = [89, 30, 25, 32, 72, 70, 51, 42, 25, 24, 53, 55, 78, 50, 13, 40, 48, 32, 26, 2, 14, 33, 45, 72, 56, 44, 21, 88, 27, 68, 15, 62, 93, 98, 73, 28, 16, 46, 87, 28, 65, 38, 67, 16, 85, 63, 23, 69, 64, 91, 9, 70, 81, 27, 97, 82, 6, 88, 3, 7, 46, 13, 11, 64, 76, 31, 26, 38, 28, 13, 17, 69, 90, 1, 6, 7, 64, 43, 9, 73, 80, 98, 46, 27, 22, 87, 49, 83, 6, 39, 42, 51, 54, 84, 34, 53, 78, 40, 14, 5]
-
-
-// 2. Adding a React UI
-// 1) Linear search
-// Given the following dataset, find out how many tries it took to search for a particular item in the dataset. If the item is not in the dataset, provide a message and indicate how many searches it took to find that out.
-function indexOf(array, value) {
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] == value) {
-      return i;
-    }
-  }
-  return "Value not found";
-}
-
-// console.log(indexOf(testData, 87));
-
-
-// 2) Binary search
-// Use the same front end and the dataset from the previous exercise for this exercise. Use array.sort to sort the dataset. Then implement a binary search to find a particular value in the dataset. Display how many tries it took to search for a particular item in the dataset using binary search. If the item is not in the dataset, provide a message and indicate how many searches it took to find that out.
-function binarySearch(actualArray, value, start, end) {
-  array = actualArray.sort((a, b) => a - b)
-  var start = start === undefined ? 0 : start;
-  var end = end === undefined ? array.length : end;
-
-  if (start > end) {
-    return "value not found";
-  }
-
-  const index = Math.floor((start + end) / 2);
-  const item = array[index];
-
-  console.log(start, end);
-  if (item == value) {
-    return index;
-  } else if (item < value) {
-    return binarySearch(array, value, index + 1, end);
-  } else if (item > value) {
-    return binarySearch(array, value, start, index - 1);
-  }
-}
-
-// console.log(binarySearch(testData, 33, 1, 98));
-
-
-// 3. Find a book
-// Imagine you are looking for a book in a library with a Dewey Decimal index. How would you go about it? Can you express this process as a search algorithm? Implement your algorithm to find a book whose Dewey and book title is provided.
-
-const library = [
-  { dewey: "001", title: "Book 1" },
-  { dewey: "002", title: "Book 2" },
-  { dewey: "003", title: "Book 3" },
-  { dewey: "004", title: "Book 4" },
-  { dewey: "005", title: "Book 5" }
-];
-
-function deweySearch(dewey, title, books) {
-  books.forEach(book => {
-    if (book.dewey === dewey && book.title === title) {
-      console.log("Book", book);
-      return book;
-    }
-  });
-}
-
-// deweySearch("002", "Book 2", library);
-
 class BinarySearchTree {
   constructor(key = null, value = null, parent = null) {
     this.key = key;
@@ -233,17 +164,28 @@ function postOrder(tree) {
   console.log(tree.key);
 }
 
+// 3. Find a book
+const library = [
+  { dewey: "001", title: "Book 1" },
+  { dewey: "002", title: "Book 2" },
+  { dewey: "003", title: "Book 3" },
+  { dewey: "004", title: "Book 4" },
+  { dewey: "005", title: "Book 5" }
+];
 
+function deweySearch(dewey, title, books) {
+  books.forEach(book => {
+    //console.log(book.title);
+    if (book.dewey === dewey && book.title === title) {
+      console.log("Book", book);
+      // return book;
+    }
+  });
+}
 
+//deweySearch("002", "Book 2", library);
 
 // 5. Implement different tree traversals
-// Using your BinarySearchTree class from your previous lesson, create a binary search tree with the following dataset: 25 15 50 10 24 35 70 4 12 18 31 44 66 90 22. Then implement inOrder(), preOrder(), and postOrder() functions. Test your functions with the following datasets.
-
-// A pre-order traversal should give you the following order: 25, 15, 10, 4, 12, 24, 18, 22, 50, 35, 31, 44, 70, 66, 90
-
-// In-order: 4, 10, 12, 15, 18, 22, 24, 25, 31, 35, 44, 50, 66, 70, 90
-
-// Post-order: 4, 12, 10, 22, 18, 24, 15, 31, 44, 35, 66, 90, 70, 50, 25
 
 const tree = new BinarySearchTree();
 
@@ -285,8 +227,7 @@ function bfs(values) {
   return values;
 }
 
-// 7. Max profit
-// The share price for a company over a week's trading is as follows: [128, 97, 121, 123, 98, 97, 105]. If you had to buy shares in the company on a particular day, and sell the shares on a subsequent day, write an algorithm to work out what the maximum profit you could make would be.
+// 7. Max Profit
 function maxProfit(tree) {
   let min = tree[0];
   let max = tree[tree.length - 1];
@@ -306,5 +247,3 @@ function maxProfit(tree) {
 const test = [128, 97, 121, 123, 98, 97, 105];
 
 // console.log(maxProfit(test));
-
-
